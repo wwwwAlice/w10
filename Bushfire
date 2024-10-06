@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bushfire Safer Place South Australia</title>
+  <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+</head>
+<body>
+  <h1>Bushfire Safer Place South Australia</h1>
+
+  <!-- Visualization Container -->
+  <div id="vis"></div>
+
+  <script type="text/javascript">
+    var vlSpec = {
+      "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+      "width": 800,
+      "height": 450,
+      "title": {
+        "fontSize": 20,
+        "text": "Bushfire Safer Place South Australia"
+      },
+      "layer": [
+        {
+          "data": {
+            "url": "https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPOSITORY/main/SAMAP.json", 
+            "format": {"type": "topojson", "feature": "australian-states"}
+          },
+          "mark": {
+            "type": "geoshape",
+            "fill": "#e0e0e0", 
+            "stroke": "gray",
+            "strokeWidth": 1
+          },
+          "encoding": {
+            "tooltip": [
+              {"field": "STATE_NAME", "type": "nominal", "title": "State Name"}
+            ]
+          }
+        },
+        {
+          "data": {
+            "url": "https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPOSITORY/main/BushfireSaferPlaces_GDA.json", 
+            "format": {"type": "topojson", "feature": "BushfireSaferPlaces_GDA2020"}
+          },
+          "mark": {
+            "type": "geoshape",
+            "fill": "#e0e0e0", 
+            "stroke": "red",
+            "strokeWidth": 1
+          },
+          "encoding": {
+            "tooltip": [
+              {"field": "STATE_NAME", "type": "nominal", "title": "State Name"}
+            ]
+          }
+        }
+      ]
+    };
+
+    vegaEmbed('#vis', vlSpec).then(function(result) {
+      console.log(result);
+    }).catch(console.error);
+  </script>
+
+</body>
+</html>
